@@ -95,8 +95,13 @@ public class Prisoner {
      */
     public HatColor guess(ArrayList<HatColor> observation,
                           ArrayList<HatColor> history) {
-        // Your code goes here
-        // Currently just make a random color and return it as a guess
+
+
+        if (history.size() != 99 && history.size() % 2 == 1)
+        {
+            return observation.get(0);
+        }
+
         return HatColor.randomColor();
     }
 }
