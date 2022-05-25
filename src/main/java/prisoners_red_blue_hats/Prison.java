@@ -124,10 +124,10 @@ public class Prison {
         Executioner executioner = new Executioner();
 
         for (int i = 0; i < size; i++) {
+            observation.remove(0);
             HatColor answer = executioner.ask(prisoners.get(i), observation,
                     history);
 
-            observation.remove(0);
             history.add(answer);
         }
 
