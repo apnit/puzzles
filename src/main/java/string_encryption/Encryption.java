@@ -40,6 +40,8 @@ public class Encryption {
         return sum;
     }
 
+
+    // probably uses recursion
     public static String Decrypt(String str) {
         char[] holder = str.toCharArray();
         String sum = "";
