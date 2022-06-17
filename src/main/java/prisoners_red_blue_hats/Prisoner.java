@@ -1,6 +1,7 @@
 package prisoners_red_blue_hats;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Prisoner class
@@ -97,6 +98,48 @@ public class Prisoner {
                           ArrayList<HatColor> history) {
         // Your code goes here
         // Currently just make a random color and return it as a guess
-        return HatColor.randomColor();
+
+
+            int occurrence = Collections.frequency(observation,HatColor.RED);
+
+            if(history.isEmpty()) {
+                if(occurrence%2 == 0) {
+                    return HatColor.RED;
+                }
+
+                else {
+                    return HatColor.BLUE;
+                }
+
+            }
+            else {
+                int redCountHistory = 0;
+                for(int i = 1; i<history.size();i++) {
+                    if(history.get(i) == HatColor.RED)
+                        redCountHistory++;
+
+                }
+
+                if(history.get(0) == HatColor.RED) {
+                    if( (occurrence + redCountHistory) %2 == 0) {
+                        return HatColor.BLUE;
+                    }
+                    else {
+                        return HatColor.RED;
+                    }
+                }
+
+                else {
+                    if( (occurrence + redCountHistory) % 2 == 0) {
+                        return HatColor.RED;
+                    }
+                    else {
+                        return HatColor.BLUE;
+                    }
+
+                }
+
+            }
+
     }
 }

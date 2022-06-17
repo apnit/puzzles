@@ -121,13 +121,18 @@ public class Prison {
 
         ArrayList<HatColor> history = new ArrayList<>();
 
+
         Executioner executioner = new Executioner();
 
+
         for (int i = 0; i < size; i++) {
+            observation.remove(0);
             HatColor answer = executioner.ask(prisoners.get(i), observation,
                     history);
 
-            observation.remove(0);
+
+//            observation.remove(0);        moved to upper lines for the code to work easier
+
             history.add(answer);
         }
 
