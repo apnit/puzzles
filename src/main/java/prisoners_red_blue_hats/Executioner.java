@@ -1,72 +1,36 @@
-package string_encryption;
+package prisoners_red_blue_hats;
 
-public class Encryption {
-    public static String Encrypt(String str) {
+import java.util.ArrayList;
 
-        StringBuilder x = new StringBuilder();
-        int q = str.length();
-        for (int i = 0; i < q; i++) {
-            if (i < (q - 1)) {
-                int w = str.charAt(i);
-                int e = str.charAt(i + 1);
-                char r = (char) (w + e);
-                x.append(r);
-            } else {
-                int w = str.charAt(0);
-                int e = str.charAt(q - 1);
-                char r = (char) (w + e);
-                x.append(r);
-            }
+///
+//        * The executioner that will iterate over the prisoners and asks each of them.
+//        *
+//        * @author Alireza Jafartash
+//        */
+public class Executioner {
+
+    //    /
+//            * <p>Executioner asks the specified prisoner and returns the answer.</p>
+//            *
+//            * <p>The observation and history is passed to the prisoner as its
+//     * perception from the environment.</p>
+//            *
+//            * <p>If the answer was wrong. The prisoner will be executed.</p>
+//            *
+//            * @param prisoner    the current prisoner that must guess the
+//     * @param observation the hat color of the front prisoners
+//     * @param history     the answers of the prisoners
+//     * @return the answer of the prisoner that was asked
+//     */
+    public HatColor ask(Prisoner prisoner, ArrayList<HatColor> observation,
+                        ArrayList<HatColor> history) {
+        HatColor answer = prisoner.guess(observation, history);
+
+        if (!answer.equals(prisoner.getHatColor())) {
+            // If the answer is wrong it must be executed.
+            prisoner.die();
         }
 
-        if (q % 2 == 0) {
-            String first = String.valueOf(str.charAt(0));
-            String last = String.valueOf(str.charAt(q - 1));
-            String z = x.substring(0, q - 1);
-            x = new StringBuilder(z + last + first);
-        }
-        return x.toString();
+        return answer;
     }
-
-    public static String Decrypt(String str) {
-
-        int q = str.length();
-        if (str.charAt(q - 1) < 122) {
-            str = str + "a";
-        }
-        int[] a = new int[q];
-        int[] b = new int[q];
-
-        for (int i = 0; i < q; i++) {
-            a[i] = str.charAt(i);
-        }
-
-        StringBuilder x = new StringBuilder();
-        int p = 0;
-        int o = 0;
-
-        for (int j = 0; j < q; j++) {
-
-            if (j % 2 == 0) {
-                p += a[j];
-            } else {
-                o += a[j];
-            }
-        }
-        int u = ((p - o) / 2);
-        b[0] = u;
-        char ch = (char) u;
-        x.append(ch);
-        int y = q;
-        if (str.charAt(q - 1) < 122) {
-            y = q - 1;
-        }
-        for (int k = 1; k < y; k++) {
-            b[k] = a[k - 1] - b[k - 1];
-            char l = (char) b[k];
-            x.append(l);
-        }
-        return x.toString();
-    }
-}
 
