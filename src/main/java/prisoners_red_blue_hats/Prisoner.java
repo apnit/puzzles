@@ -1,6 +1,7 @@
 package prisoners_red_blue_hats;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Prisoner class
@@ -95,8 +96,59 @@ public class Prisoner {
      */
     public HatColor guess(ArrayList<HatColor> observation,
                           ArrayList<HatColor> history) {
-        // Your code goes here
-        // Currently just make a random color and return it as a guess
-        return HatColor.randomColor();
+        boolean even = false;
+        if (history.size() > 0) {
+            String firstColor = history.get(0).getColorString();
+            if (Objects.equals(firstColor, HatColor.BLUE.getColorString())) {
+                even = true;
+            }
+        }
+
+        int red = 0;
+        for (HatColor hatColor : observation) {
+            if (Objects.equals(hatColor.getColorString(), "RED")) {
+                red++;
+            }
+        }
+        if (Objects.equals(observation.get(0).getColorString(), "RED")) {
+            red--;
+        }
+
+        int pastRed = 0;
+        for (HatColor hatColor : history) {
+            if (Objects.equals(hatColor.getColorString(), "RED")) {
+                pastRed++;
+            }
+        }
+
+        if (even) {
+            if (pastRed%2==0) {
+                if (red%2==0) {
+                    return HatColor.BLUE;
+                } else {
+                    return HatColor.RED;
+                }
+            } else {
+                if (red%2==0) {
+                    return HatColor.RED;
+                } else {
+                    return HatColor.BLUE;
+                }
+            }
+        } else {
+            if (pastRed%2==0) {
+                if (red%2==0) {
+                    return HatColor.RED;
+                } else {
+                    return HatColor.BLUE;
+                }
+            } else {
+                if (red%2==0) {
+                    return HatColor.BLUE;
+                } else {
+                    return HatColor.RED;
+                }
+            }
+        }
     }
 }
