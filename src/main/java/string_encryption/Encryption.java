@@ -2,35 +2,37 @@ package string_encryption;
 
 public class Encryption {
     public static String Encrypt(String str) {
-          String stri = "";
+            StringBuilder a = new StringBuilder();
 
         for (int i = 0; i < str.length(); i++){
             if (i == str.length()-1){
                 int x = str.charAt(0);
                 int y = str.charAt(str.length()-1);
                 char z = (char) (x+y);
-                stri = stri+String.valueOf(z);
+                a.append(z);
             }
 
             else {
                 int x = str.charAt(i);
                 int y = str.charAt(i+1);
                 char z = (char) (x + y);
-                stri = stri + String.valueOf(z);
+                a.append(z);
             }
 
         }
-        String s  = null;
-        String x1 = null;
-        String x2 = null;
+    
+        String p;
 
         if (str.length() % 2 == 0){
-             x1 = String.valueOf(str.charAt(0));
-             x2 = String.valueOf(str.charAt(str.length()-1));
-             s = stri.substring(0,str.length()-1);
+         
+             String x1 = String.valueOf(str.charAt(str.length()-1));
+            String x2 = String.valueOf(str.charAt(0));
+            String s = a.substring(0,str.length()-1);
+            a = new StringBuilder(s + x1 + x2);
 
         }
-        return  s+x1+x2;
+        p = a.toString();
+        return  p;
     }
 
     public static String Decrypt(String str) {
