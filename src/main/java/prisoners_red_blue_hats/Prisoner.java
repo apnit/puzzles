@@ -140,7 +140,7 @@ public class Prisoner {
             } else {
                 return HatColor.BLUE;
             }
-        }
+        } 
 
     }
 }
