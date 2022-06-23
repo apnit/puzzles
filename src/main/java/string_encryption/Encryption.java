@@ -24,7 +24,7 @@ public class Encryption {
         String p;
 
         if (str.length() % 2 == 0){
-         
+        
              String x1 = String.valueOf(str.charAt(str.length()-1));
             String x2 = String.valueOf(str.charAt(0));
             String s = a.substring(0,str.length()-1);
