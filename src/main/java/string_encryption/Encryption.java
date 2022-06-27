@@ -23,10 +23,32 @@ public class Encryption {
     }
 
     public static String Decrypt(String str) {
+
         StringBuilder stringBuilder = new StringBuilder();
-        /*
-        code
-         */
-        return stringBuilder.toString();
+        int n = str.length(), sum = 0;
+
+        for (int i = 0; i < n; i++){
+            if (i % 2 == 0){
+                int temp1 = str.charAt(i);
+                int temp2;
+                if (i == n - 1){
+                    temp2 = str.charAt(0);
+                }
+                else {
+                    temp2 = str.charAt(i + 1);
+                }
+                sum += temp1 - temp2;
+            }
+        }
+
+        char temp = (char) ((sum + str.charAt(0)) / 2);
+
+        for (int i = 0; i < n; i++){
+            if (temp != 0){
+                stringBuilder.append(temp);
+            }
+            temp = (char) (str.charAt(i) - temp);
+        }
+        return String.valueOf(stringBuilder);
     }
 }
