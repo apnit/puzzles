@@ -95,8 +95,44 @@ public class Prisoner {
      */
     public HatColor guess(ArrayList<HatColor> observation,
                           ArrayList<HatColor> history) {
-        // Your code goes here
-        // Currently just make a random color and return it as a guess
-        return HatColor.randomColor();
+        if (observation.size() == 99) {
+            int redCounts = 0;
+            for (HatColor i : observation) {
+                if (i == HatColor.RED)
+                    redCounts++;
+            }
+
+            if (redCounts % 2 == 0)
+                return HatColor.RED;
+            else
+                return HatColor.BLUE;
+        }
+        else {
+            int frontRedCounts = 0;
+            int historyRedCounts = 0;
+
+            for (HatColor i : observation) {
+                if (i == HatColor.RED)
+                    frontRedCounts++;
+            }
+            for (int i = 0; i < history.size(); i++) {
+                if (history.get(i) == HatColor.RED && i != 0)
+                    historyRedCounts++;
+            }
+
+            if (history.get(0) == HatColor.RED) {
+                if ((frontRedCounts+historyRedCounts) % 2 == 1)
+                    return HatColor.RED;
+                else
+                    return HatColor.BLUE;
+            }
+            else {
+                if ((frontRedCounts+historyRedCounts) % 2 == 1)
+                    return HatColor.BLUE;
+                else
+                    return HatColor.RED;
+            }
+
+        }
     }
 }

@@ -22,9 +22,7 @@ public enum HatColor {
      *
      * @param colorString string value
      */
-    HatColor(String colorString) {
-        this.colorString = colorString;
-    }
+    HatColor(String colorString) { this.colorString = colorString; }
 
     /**
      * Makes a random color and returns it
