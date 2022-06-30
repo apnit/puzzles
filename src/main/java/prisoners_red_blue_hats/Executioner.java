@@ -31,6 +31,7 @@ public class Executioner {
             prisoner.die();
         }
 
+        
         return answer;
     }
 
