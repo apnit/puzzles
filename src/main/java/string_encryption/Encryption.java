@@ -41,16 +41,24 @@ public class Encryption {
     }
 
 
-    // probably uses recursion
+
     public static String Decrypt(String str) {
-        char[] holder = str.toCharArray();
-        String sum = "";
+        StringBuilder text = new StringBuilder();
+        int sum = 0;
 
-        for( int i = 0 ; i<str.length() ; i++){
 
+        for (int i = 0; i < str.length(); i+=2) {
+            if (i == str.length()-1)
+                sum += (int) str.charAt(i) - (int) str.charAt(0);
+            else
+                sum += (int) str.charAt(i) - (int) str.charAt(i+1);
         }
-
-
-        return "";
+        char tempChar = (char) ((sum + str.charAt(0))/2);
+        for (int i = 0; i < str.length(); i++) {
+            if (tempChar != 0)
+                text.append(tempChar);
+            tempChar = (char) (str.charAt(i) - tempChar);
+        }
+        return String.valueOf(text);
     }
 }
