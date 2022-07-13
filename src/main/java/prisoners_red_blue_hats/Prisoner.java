@@ -1,6 +1,7 @@
 package prisoners_red_blue_hats;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Prisoner class
@@ -95,14 +96,31 @@ public class Prisoner {
      */
     public HatColor guess(ArrayList<HatColor> observation,
                           ArrayList<HatColor> history) {
-        int frontReds = 0;
-        for (HatColor color : observation)
-            if (color.equals(HatColor.RED)) frontReds++;
-
-        int historyReds = 0;
-        for (HatColor color : history)
-            if (color.equals(HatColor.RED)) historyReds++;
-
-        return (frontReds + historyReds) % 2 == 0 ? HatColor.BLUE : HatColor.RED;
+        ArrayList<HatColor> frontS = new ArrayList<>();
+        for (int i = 1; i < observation.size();i++)
+            frontS.add(observation.get(i));
+        observation = frontS;
+        int numB = observation.stream().filter(o->o.equals(HatColor.BLUE)).collect(Collectors.toList()).size();
+        int numPrevB;
+        if(history.size() == 0 )
+        {
+            if(numB % 2 == 0 )
+                return HatColor.RED;
+            else
+                return HatColor.BLUE;
+        }else {
+            numPrevB = history.stream().filter(o->o.equals(HatColor.BLUE)).collect(Collectors.toList()).size();
+            if (numPrevB % 2 == 0) {
+                if (numB % 2 == 0)
+                    return HatColor.RED;
+                else
+                    return HatColor.BLUE;
+            } else {
+                if (numB % 2 == 0)
+                    return HatColor.BLUE;
+                else
+                    return HatColor.RED;
+            }
+        }
     }
 }

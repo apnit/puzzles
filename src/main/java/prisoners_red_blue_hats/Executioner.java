@@ -27,7 +27,6 @@ public class Executioner {
         HatColor answer = prisoner.guess(observation, history);
 
         if (!answer.equals(prisoner.getHatColor())) {
-            // If the answer is wrong it must be executed.
             prisoner.die();
         }
 
